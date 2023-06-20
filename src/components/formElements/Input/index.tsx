@@ -35,7 +35,12 @@ export default function Input<TFieldValues extends FieldValues>(
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const { value, valueAsNumber } = event.target;
-      field.onChange(props.type === "number" ? valueAsNumber : value);
+
+      if (props.type === "number") {
+        field.onChange(valueAsNumber || value);
+      } else {
+        field.onChange(value);
+      }
 
       if (onChange) {
         onChange(event);
@@ -88,6 +93,5 @@ export default function Input<TFieldValues extends FieldValues>(
 }
 
 Input.defaultProps = {
-  type: "text",
   fullWidth: true,
 };

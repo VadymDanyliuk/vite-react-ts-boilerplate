@@ -11,6 +11,7 @@ interface Profile {
   firstName: string;
   lastName: string;
   email: string;
+  age: number;
   bio: string;
 }
 
@@ -22,6 +23,7 @@ export default function ProfileForm() {
       firstName: "",
       lastName: "",
       email: "",
+      age: 18,
       bio: "",
     },
   });
@@ -33,18 +35,16 @@ export default function ProfileForm() {
   return (
     <Form<FormType> form={form} onSubmit={handleSubmit}>
       <Control>
-        <Input<FormType> name="firstName" label="Forename" />
+        <Input<FormType> type="text" name="firstName" label="Forename" />
       </Control>
       <Control>
-        <Input<FormType> name="lastName" label="Surname" />
+        <Input<FormType> type="text" name="lastName" label="Surname" />
       </Control>
       <Control>
-        <Input<FormType>
-          type="email"
-          name="email"
-          label="Email"
-          validation={{ required: true }}
-        />
+        <Input<FormType> type="number" name="age" label="Age" />
+      </Control>
+      <Control>
+        <Input<FormType> type="email" name="email" label="Email" />
       </Control>
       <Control>
         <Textarea<FormType> name="bio" label="Bio" />

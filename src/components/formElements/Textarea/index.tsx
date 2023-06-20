@@ -1,7 +1,7 @@
 import { FieldValues } from "react-hook-form";
 import Input, { InputProps } from "../Input";
 
-export type TextareaProps<TFieldValues extends FieldValues> = Omit<
+export type TextareaProps<TFieldValues> = Omit<
   InputProps<TFieldValues>,
   "type" | "multiline"
 >;
