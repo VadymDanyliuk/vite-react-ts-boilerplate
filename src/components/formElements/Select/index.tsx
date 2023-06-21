@@ -1,4 +1,4 @@
-import { FocusEvent, ReactNode, useCallback } from "react";
+import { ChangeEvent, FocusEvent, ReactNode, useCallback } from "react";
 import { FieldValues, useController, useFormContext } from "react-hook-form";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
@@ -50,7 +50,7 @@ export default function Select<
 
   const handleChange = useCallback(
     (event: SelectChangeEvent<HTMLSelectElement>, child: ReactNode) => {
-      field.onChange(event);
+      field.onChange(event as ChangeEvent);
 
       if (onChange) {
         onChange(event, child);

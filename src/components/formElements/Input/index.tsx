@@ -1,12 +1,23 @@
 import { ChangeEvent, FocusEvent, useCallback } from "react";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
-import { FieldValues, useController, useFormContext } from "react-hook-form";
+import {
+  FieldPath,
+  FieldValues,
+  PathValue,
+  useController,
+  useFormContext,
+} from "react-hook-form";
 import { BaseInputType, TextFieldType } from "../types";
 import {
   applyTextValidationOptions,
   transformValidationOptions,
 } from "../helpers";
 import { InputError } from "../InputError";
+
+type InputPathValue<TFieldValues extends FieldValues> = PathValue<
+  TFieldValues,
+  FieldPath<TFieldValues>
+>;
 
 export type InputProps<TFieldValues> = Omit<
   TextFieldProps,
@@ -30,16 +41,17 @@ export default function Input<TFieldValues extends FieldValues>(
     field,
     fieldState: { invalid },
     formState: { errors },
-  } = useController({ control, name, rules });
+  } = useController<TFieldValues>({ control, name, rules });
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const { value, valueAsNumber } = event.target;
 
       if (props.type === "number") {
-        field.onChange(valueAsNumber || value);
+        const newValue = valueAsNumber || value;
+        field.onChange(newValue as InputPathValue<TFieldValues>);
       } else {
-        field.onChange(value);
+        field.onChange(event);
       }
 
       if (onChange) {
@@ -57,7 +69,7 @@ export default function Input<TFieldValues extends FieldValues>(
       const trimmedValue = value.trim();
 
       if (value !== trimmedValue) {
-        field.onChange(trimmedValue);
+        field.onChange(trimmedValue as InputPathValue<TFieldValues>);
       }
     },
     [field, props.type]
