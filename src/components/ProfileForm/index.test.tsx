@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { faker, screen, setup } from "test-utils";
+import { faker, render, screen } from "test-utils";
 import ProfileForm, { FormType, ProfileFormProps } from "./index";
 
 const page = {
@@ -7,7 +7,7 @@ const page = {
     return screen.getByText("Submit");
   },
   get emailField() {
-    return screen.getByRole("textbox", { name: "Email" });
+    return screen.getByRole("textbox", { name: /email/i });
   },
 };
 
@@ -24,7 +24,7 @@ function Wrapper({ onSubmit }: Pick<ProfileFormProps, "onSubmit">) {
 test("do not trigger a submit action for an invalid form", async () => {
   const handleSubmit = jest.fn();
 
-  const { user } = setup(<Wrapper onSubmit={handleSubmit} />);
+  const { user } = render(<Wrapper onSubmit={handleSubmit} />);
 
   await user.click(page.submitButton);
 
@@ -34,7 +34,7 @@ test("do not trigger a submit action for an invalid form", async () => {
 test("trigger a submit action for a valid form", async () => {
   const handleSubmit = jest.fn();
 
-  const { user } = setup(<Wrapper onSubmit={handleSubmit} />);
+  const { user } = render(<Wrapper onSubmit={handleSubmit} />);
 
   await user.type(page.emailField, faker.internet.email());
 
