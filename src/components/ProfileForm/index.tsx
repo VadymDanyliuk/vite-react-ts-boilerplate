@@ -10,7 +10,7 @@ import Input from "../formElements/Input";
 import Textarea from "../formElements/Textarea";
 // import Select from "../formElements/Select";
 
-interface Profile {
+export interface Profile {
   firstName: string;
   lastName: string;
   email: string;
@@ -18,7 +18,9 @@ interface Profile {
   bio: string;
 }
 
-export type FormType = Profile;
+export type ProfileFormType = Profile;
+
+type FormType = ProfileFormType;
 
 export interface ProfileFormProps {
   form: UseFormReturn<FormType>;
@@ -32,10 +34,10 @@ export default function ProfileForm(props: ProfileFormProps) {
   return (
     <Form<FormType> form={form} onSubmit={onSubmit} onError={onError}>
       <Control>
-        <Input<FormType> type="text" name="firstName" label="Forename" />
+        <Input<FormType> type="text" name="firstName" label="First Name" />
       </Control>
       <Control>
-        <Input<FormType> type="text" name="lastName" label="Surname" />
+        <Input<FormType> type="text" name="lastName" label="Last Name" />
       </Control>
       <Control>
         <Input<FormType> type="number" name="age" label="Age" />

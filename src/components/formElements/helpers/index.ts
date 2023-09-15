@@ -31,7 +31,7 @@ export function transformValidationOptions(options: ValidationOptions = {}) {
 
 export function applyTextValidationOptions(
   type: TextFieldType,
-  options: ValidationOptions = {}
+  options: ValidationOptions = {},
 ) {
   const rules = { ...options };
 
@@ -64,7 +64,7 @@ export function applyTextValidationOptions(
 
 export function getSelectBlankOption(
   blankOption: SelectBlankOption,
-  required: boolean
+  required: boolean,
 ) {
   const value = EMPTY_SELECT_OPTION_VALUE;
 

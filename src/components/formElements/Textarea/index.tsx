@@ -7,7 +7,7 @@ export type TextareaProps<TFieldValues> = Omit<
 >;
 
 export default function Textarea<TFieldValues extends FieldValues>(
-  props: TextareaProps<TFieldValues>
+  props: TextareaProps<TFieldValues>,
 ) {
   return <Input type="text" multiline {...props} />;
 }

@@ -14,7 +14,7 @@ export interface FormProps<TFormValues extends FieldValues> {
 }
 
 export default function Form<TFormValues extends FieldValues>(
-  props: PropsWithChildren<FormProps<TFormValues>>
+  props: PropsWithChildren<FormProps<TFormValues>>,
 ) {
   const { form, onSubmit, onError, children } = props;
 

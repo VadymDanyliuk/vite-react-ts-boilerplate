@@ -25,7 +25,7 @@ export type SelectProps<TFieldValues, TSelectOption> = Omit<
 
 export default function Select<
   TFieldValues extends FieldValues,
-  TSelectOption = SelectOption
+  TSelectOption = SelectOption,
 >(props: SelectProps<TFieldValues, TSelectOption>) {
   const {
     name,
@@ -56,7 +56,7 @@ export default function Select<
         onChange(event, child);
       }
     },
-    [field, onChange]
+    [field, onChange],
   );
 
   const handleBlur = useCallback(
@@ -67,7 +67,7 @@ export default function Select<
         onBlur(event);
       }
     },
-    [field, onBlur]
+    [field, onBlur],
   );
 
   const handleRenderOption = useCallback(
@@ -84,7 +84,7 @@ export default function Select<
         </MenuItem>
       );
     },
-    [renderOption]
+    [renderOption],
   );
 
   const blankOptionItem = getSelectBlankOption(blankOption, !!rules.required);

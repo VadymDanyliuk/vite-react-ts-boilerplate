@@ -1,18 +1,22 @@
 import { useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Grid from "@mui/material/Grid";
-import Layout from "../../layouts/Layout";
-import ProfileForm, { FormType } from "../../ProfileForm";
+import Layout from "../../components/layouts/Layout";
+import ProfileForm, { ProfileFormType } from "../../components/ProfileForm";
 
-export default function Profile() {
+type FormType = ProfileFormType;
+
+const defaultValues = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  age: 18,
+  bio: "",
+};
+
+export default function ProfilePage() {
   const form = useForm<FormType>({
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      age: 18,
-      bio: "",
-    },
+    defaultValues,
   });
 
   const handleSubmit: SubmitHandler<FormType> = useCallback((values) => {

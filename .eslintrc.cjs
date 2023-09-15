@@ -17,8 +17,13 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
-    "plugin:testing-library/react",
     "prettier",
   ],
   plugins: ["@typescript-eslint"],
+  overrides: [
+    {
+      files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+      extends: ["plugin:testing-library/react"],
+    },
+  ],
 };

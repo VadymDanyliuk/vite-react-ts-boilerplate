@@ -1,18 +1,18 @@
-import { useForm } from "react-hook-form";
 import { faker, render, screen } from "test-utils";
-import ProfileForm, { FormType, ProfileFormProps } from "./index";
+import { useForm } from "react-hook-form";
+import ProfileForm, { ProfileFormProps, ProfileFormType } from "./index";
 
 const page = {
-  get submitButton() {
-    return screen.getByText("Submit");
-  },
   get emailField() {
     return screen.getByRole("textbox", { name: /email/i });
+  },
+  get submitButton() {
+    return screen.getByRole("button");
   },
 };
 
 function Wrapper({ onSubmit }: Pick<ProfileFormProps, "onSubmit">) {
-  const form = useForm<FormType>({
+  const form = useForm<ProfileFormType>({
     defaultValues: {
       email: "",
     },

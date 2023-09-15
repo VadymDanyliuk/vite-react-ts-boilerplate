@@ -10,7 +10,7 @@ export interface InputErrorProps<TFieldValues extends FieldValues> {
 }
 
 export function InputError<TFieldValues extends FieldValues>(
-  props: InputErrorProps<TFieldValues>
+  props: InputErrorProps<TFieldValues>,
 ) {
   const { name, errors } = props;
 

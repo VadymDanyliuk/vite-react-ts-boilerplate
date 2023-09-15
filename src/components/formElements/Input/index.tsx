@@ -28,7 +28,7 @@ export type InputProps<TFieldValues> = Omit<
   };
 
 export default function Input<TFieldValues extends FieldValues>(
-  props: InputProps<TFieldValues>
+  props: InputProps<TFieldValues>,
 ) {
   const { name, helperText, validation, onChange, onBlur, ...inputProps } =
     props;
@@ -42,6 +42,20 @@ export default function Input<TFieldValues extends FieldValues>(
     fieldState: { invalid },
     formState: { errors },
   } = useController<TFieldValues>({ control, name, rules });
+
+  const trimValue = useCallback(
+    (event: FocusEvent<HTMLInputElement>) => {
+      if (props.type === "number") return;
+
+      const value = event.target.value;
+      const trimmedValue = value.trim();
+
+      if (value !== trimmedValue) {
+        field.onChange(trimmedValue as InputPathValue<TFieldValues>);
+      }
+    },
+    [field, props.type],
+  );
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -58,21 +72,7 @@ export default function Input<TFieldValues extends FieldValues>(
         onChange(event);
       }
     },
-    [field, onChange, props.type]
-  );
-
-  const trimValue = useCallback(
-    (event: FocusEvent<HTMLInputElement>) => {
-      if (props.type === "number") return;
-
-      const value = event.target.value;
-      const trimmedValue = value.trim();
-
-      if (value !== trimmedValue) {
-        field.onChange(trimmedValue as InputPathValue<TFieldValues>);
-      }
-    },
-    [field, props.type]
+    [field, onChange, props.type],
   );
 
   const handleBlur = useCallback(
@@ -84,7 +84,7 @@ export default function Input<TFieldValues extends FieldValues>(
         onBlur(event);
       }
     },
-    [field, onBlur, trimValue]
+    [field, onBlur, trimValue],
   );
 
   return (

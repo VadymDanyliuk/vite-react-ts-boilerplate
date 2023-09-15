@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
-import App from "./components/App";
 import Root from "./components/Root";
+import ProfilePage from "./pages/ProfilePage";
+
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -16,8 +17,10 @@ ReactDOM.createRoot(rootElement).render(
     <BrowserRouter>
       <Root>
         <CssBaseline />
-        <App />
+        <Routes>
+          <Route path="/" element={<ProfilePage />} />
+        </Routes>
       </Root>
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

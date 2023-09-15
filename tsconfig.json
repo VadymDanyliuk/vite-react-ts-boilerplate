@@ -20,6 +20,6 @@
       "test-utils": ["./utils/test-utils"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "./jest.setup.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
